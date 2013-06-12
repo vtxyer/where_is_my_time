@@ -83,6 +83,7 @@ public class EntryFragment extends ListFragment {
 
 	
 	private void setViewList(List<Map<String, String>> nameAry){
+		String role = getRole();
 		if(nameAry.isEmpty()){
 			Map<String, String> map = (Map<String, String>)new HashMap<String, String>();
 			map.put("_APP_NAME", "Empty");
@@ -90,10 +91,20 @@ public class EntryFragment extends ListFragment {
 			nameAry.add(map);
 		}
 		globalList = nameAry;
-		ListAdapter listAdapter = new SimpleAdapter(getActivity(), nameAry, 
+		
+		ListAdapter listAdapter;
+		if(role.equals("titles")){
+			listAdapter = new SimpleAdapter(getActivity(), nameAry, 
                 R.layout.listview,
                 new String[]{"_APP_NAME", "_CONTENT"}, 
                 new int[]{R.id.name, R.id.text});
+		}
+		else{
+			listAdapter = new SimpleAdapter(getActivity(), nameAry, 
+	                R.layout.listview,
+	                new String[]{"_DATE", "_CONTENT"}, 
+	                new int[]{R.id.name, R.id.text});
+		}
 		setListAdapter(listAdapter);
 	}
 	
