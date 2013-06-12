@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Where_is_my_time</string>
+    <string name="action_settings">Settings</string>
+    <string name="msgText">Empty</string>
+    <string name="TestStr"/>
+
+</resources>

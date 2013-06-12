@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainUI"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+    android:gravity="top"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:scrollbars="vertical"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        
+        <LinearLayout 
+           	android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/ipaddress_bg" >
+            	        
+	        <TextView
+	            android:id="@+id/appNameText"
+	            android:layout_width="0dip"
+	            android:layout_height="match_parent"
+	            android:layout_gravity="center"
+	            android:layout_weight="3"
+	            android:textColor="#FF0000"  
+	            android:textSize="14sp"
+	            android:text="@string/msgText" />
+	        
+            <TextView
+                android:id="@+id/service_status"
+                style="@style/InformationTextStyle"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/category_icon_theme"
+                android:textSize="10sp" />
+
+        </LinearLayout>        
+        
+
+     
+        
+        
+        
+        <RelativeLayout
+            android:id="@+id/mainfragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="8" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/information_bg"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="5dip" >
+
+
+           	<LinearLayout android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginBottom="5dip"
+                   android:layout_marginLeft="20px">
+
+                   <TextView android:id="@+id/total_time"
+                       style="@style/InformationTextStyle"
+                       android:drawableLeft="@drawable/sd_card_icon" />
+
+            </LinearLayout>
+            
+            
+            
+            <com.example.where_is_my_time.CategoryBar
+                android:id="@+id/category_bar"
+                android:layout_width="fill_parent"
+                android:layout_height="35px"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dip" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                
+                
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="20px"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/category_legend_top1"
+                        style="@style/CategoryLegendStyle"
+                        android:drawableLeft="@drawable/legend_music" />
+
+                    <TextView
+                        android:id="@+id/category_legend_top2"
+                        style="@style/CategoryLegendStyle"
+                        android:drawableLeft="@drawable/legend_video" />
+
+                    <TextView
+                        android:id="@+id/category_legend_top3"
+                        style="@style/CategoryLegendStyle"
+                        android:drawableLeft="@drawable/legend_picture" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="20px"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/category_legend_top4"
+                        style="@style/CategoryLegendStyle"
+                        android:drawableLeft="@drawable/legend_document" />
+                    <TextView
+                        android:id="@+id/category_legend_top5"
+                        style="@style/CategoryLegendStyle"
+                        android:drawableLeft="@drawable/legend_apk" />
+                    <TextView
+                        android:id="@+id/category_legend_other"
+                        style="@style/CategoryLegendStyle"
+                        android:drawableLeft="@drawable/legend_other" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
