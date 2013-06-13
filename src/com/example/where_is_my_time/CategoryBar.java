@@ -28,7 +28,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class CategoryBar extends View {
@@ -81,7 +80,6 @@ public class CategoryBar extends View {
         if (index < 0 || index >= categories.size())
             return false;
         categories.get(index).value = value;
-        Log.d("catagroy", Long.toString(categories.get(index).value) );
         invalidate();
         return true;
     }
@@ -106,7 +104,6 @@ public class CategoryBar extends View {
         d.draw(canvas);
         if (mFullValue != 0) {
             for (Category c : categories) {
-            	Log.d("VT", Long.toString(c.value) );
                 long value = (timer == null ? c.value : c.tmpValue);
                 if ( isHorizontal ) {
                     int w = (int) (value * width / mFullValue);
@@ -165,7 +162,6 @@ public class CategoryBar extends View {
                     // stop animation
                     timer.cancel();
                     timer = null;
-                    Log.v(LOG_TAG, "Animation stopped");
                     break;
                 }
             }
@@ -179,7 +175,6 @@ public class CategoryBar extends View {
             return;
         }
 
-        Log.v(LOG_TAG, "startAnimation");
 
         for (Category c : categories) {
             c.tmpValue = 0;

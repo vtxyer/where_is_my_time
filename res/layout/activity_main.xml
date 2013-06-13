@@ -18,6 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
+            
         
         <LinearLayout 
            	android:layout_width="match_parent"
@@ -49,7 +50,27 @@
         </LinearLayout>        
         
 
-     
+     	<LinearLayout 
+           	android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/information_bg" >
+
+     		<EditText
+     		    android:id="@+id/dateText"
+     		    android:layout_width="wrap_content"
+     		    android:layout_height="wrap_content"
+     		    android:layout_gravity="center"
+     		    android:layout_weight="1"
+     		    android:ems="10"
+     		    android:inputType="date"
+     		    android:onClick="setDateClick" >
+				android:gravity="center_horizontal"
+     		    <requestFocus />
+     		</EditText>
+
+        </LinearLayout>  
         
         
         

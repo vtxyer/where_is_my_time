@@ -8,6 +8,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +42,10 @@ public class EntryFragment extends ListFragment {
 		f.setArguments(args);
 		return f;
 	}
+	
+	
+	
+	
 	
 	@Override
 	public void onCreate(Bundle bundle){

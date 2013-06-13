@@ -1,6 +1,7 @@
 package com.example.where_is_my_time;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,10 +19,13 @@ import android.app.Activity;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.util.Log;
 import android.view.*;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ActivityManager;
@@ -44,6 +48,9 @@ public class MainActivity extends Activity implements entryfragmentTunnel {
 	private CategoryBar mCategoryBar;
 	private static List<Map<String, String>> nameAry = new ArrayList<Map<String, String>>();
 	TextView top1, top2, top3, top4, top5, topOther, totalTime, serviceStatus;
+	EditText dateText;
+	private String selectedDate;
+	DatePickerDialog dateDialog;
 
 	public class ComparatorList implements Comparator{
 		@Override
@@ -124,10 +131,9 @@ public class MainActivity extends Activity implements entryfragmentTunnel {
 		return msg;
 	}
 	public List<Map<String, String>> getViewListData(String role, String app_name){
-		String date = App_Service.getDateTime();
 		Cursor _cursor = null;
 		if(role.equals("titles")){
-			_cursor = dbr.query(DBHelper.tableName, colum, "_DATE=?", new String[] { date }, null, null, null);
+			_cursor = dbr.query(DBHelper.tableName, colum, "_DATE=?", new String[] { selectedDate }, null, null, null);
 		}
 		else {
 			_cursor = dbr.query(DBHelper.tableName, colum, "_APP_NAME=?", new String[] { app_name }, null, null, null);
@@ -337,6 +343,9 @@ public class MainActivity extends Activity implements entryfragmentTunnel {
     	top5 = (TextView)findViewById(R.id.category_legend_top5);
     	topOther = (TextView)findViewById(R.id.category_legend_other);
     	serviceStatus = (TextView)findViewById(R.id.service_status);
+    	dateText = (EditText)findViewById(R.id.dateText);
+    	dateText.setFocusable(false);
+    	
     }
     private void setTopViewText(int index, String msg){
     	switch(index){
@@ -368,6 +377,49 @@ public class MainActivity extends Activity implements entryfragmentTunnel {
     	alertDialog.show();
     }
     
+
+    
+    public DatePickerDialog getDateDialog(){
+    	Calendar calendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateListener = 
+        		new DatePickerDialog.OnDateSetListener() {
+        			@Override
+        			public void onDateSet(DatePicker datePicker, 
+        					int year, int month, int dayOfMonth) {
+        				String monStr, dayStr;
+        				//Calendar月份是从0开始,所以month要加1
+        				if( (month+1) < 10){
+        					monStr = "0" + Integer.toString(month+1);
+        				}
+        				else{
+        					monStr = Integer.toString(month+1);
+        				}
+        				
+        				if( dayOfMonth < 10){
+        					dayStr = "0" + Integer.toString(dayOfMonth);
+        				}
+        				else{
+        					dayStr = Integer.toString(dayOfMonth);
+        				}
+        				
+        				String date = year + "/" + monStr + "/" + dayStr; 
+        				dateText.setText( date);
+        				selectedDate = date;
+        		    	refreshFragment(titlesFragment);
+        			}
+        		};
+        DatePickerDialog dialog = new DatePickerDialog(this,
+			dateListener,
+			calendar.get(Calendar.YEAR),
+			calendar.get(Calendar.MONTH),
+			calendar.get(Calendar.DAY_OF_MONTH));
+
+        return dialog;
+    }
+    public void setDateClick(View view){
+    	dateDialog.show();;
+    }
+    
     
     
     
@@ -386,11 +438,18 @@ public class MainActivity extends Activity implements entryfragmentTunnel {
 		titlesFragment = addFragment("titles");
 		
 		super.onCreate(savedInstanceState);
+	    requestWindowFeature(Window.FEATURE_NO_TITLE); 
+	    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+	    WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 		initView();
 		titleText = (TextView)findViewById(R.id.appNameText);
 		titleText.setText("     System Time Usage");
 		setupCategoryInfo();
+		dateDialog = getDateDialog();
+		dateText.setText(App_Service.getDateTime());
+		selectedDate = App_Service.getDateTime();
+		
 		refreshFragment(titlesFragment);
 	}
 
@@ -439,6 +498,7 @@ public class MainActivity extends Activity implements entryfragmentTunnel {
 	    }
 	    return super.onOptionsItemSelected(item);
 	}
+	
 	
 	
 	
